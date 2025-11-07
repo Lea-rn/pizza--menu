@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom/client";
+import "./index.css"
 
 const pizzaData = [
   {
@@ -51,7 +52,7 @@ function App() {
   return (
     <div>
       <Header />
-      <Menu />
+      <Menu  />
       <Footer />
     </div>
   );
@@ -61,21 +62,49 @@ function App() {
 
 function Header() {
 
-    const myStyle = {color:"red" , fontSize : "58px" , textTransform : "uppercase" }
-  return <h1 style={myStyle} >Fast React Pizza Co.</h1>;
+
+  return <h1 className="title" >Fast React Pizza Co.</h1>;
 }
 
-function Menu() {
+function Menu(props) {
   return (
     <div>
-      <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <h2 className="menu-title">Our Menu </h2>
+<div className="cards-container">
+        <Pizza name="Focaccia"    
+          ingredients= "Bread with italian olive oil and rosemary"
+             photoName= "pizzas/focaccia.jpg"
+             price={18}
+          
+          />
+
+                 <Pizza name="Pizza Margherita"    
+          ingredients= "Tomato and mozarella"
+             photoName= "pizzas/margherita.jpg"
+             price={18}
+          
+          />
+     
+</div>
     </div>
   );
 }
+
+function Pizza(props) {
+  console.log("props :" , props)
+  return (
+    <section className="card">
+      <img height={200} src={props.photoName} alt={props.name} />
+     <div className="card-info">
+       <h2> {props.name}</h2>
+       <p>{props.ingredients}</p>
+       <p>{props.price  }</p>
+     </div>
+    </section>
+  );
+}
+
+
 
 function Footer() {
   const hour = new Date().getHours();  /// 21
@@ -93,15 +122,9 @@ function Footer() {
   );
 }
 
-function Pizza() {
-  return (
-    <section>
-      <img src="pizzas/spinaci.jpg" alt="we will fix that" />
-      <h2> Pizza Spinaci </h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </section>
-  );
-}
+
+
+
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 
