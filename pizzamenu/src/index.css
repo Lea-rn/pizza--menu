@@ -65,3 +65,18 @@ body {
 footer {
     text-align: center;
 }
+
+.btn{
+    background-color: #edc84b;
+    color: black;
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: transparent;
+    margin-bottom: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 1s;
+}
+.btn:hover {
+    transform: scale(1.1,1.1);
+}

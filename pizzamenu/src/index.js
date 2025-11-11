@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom/client";
-import "./index.css"
+import "./index.css";
 
 const pizzaData = [
   {
@@ -52,79 +52,95 @@ function App() {
   return (
     <div>
       <Header />
-      <Menu  />
+      <Menu />
       <Footer />
     </div>
   );
 }
 
-
-
 function Header() {
-
-
-  return <h1 className="title" >Fast React Pizza Co.</h1>;
+  return <h1 className="title">Fast React Pizza Co.</h1>;
 }
-
+/// 0 , false , "" , undefined , null
 function Menu(props) {
+  const pizzas = pizzaData;
+  // const pizzas = []
+  const numPizzas = pizzas.length; //// 0
   return (
     <div>
       <h2 className="menu-title">Our Menu </h2>
-<div className="cards-container">
-        <Pizza name="Focaccia"    
-          ingredients= "Bread with italian olive oil and rosemary"
-             photoName= "pizzas/focaccia.jpg"
-             price={18}
-          
-          />
-
-                 <Pizza name="Pizza Margherita"    
-          ingredients= "Tomato and mozarella"
-             photoName= "pizzas/margherita.jpg"
-             price={18}
-          
-          />
-     
-</div>
+      {numPizzas && (
+        <div className="cards-container">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 function Pizza(props) {
-  console.log("props :" , props)
+  /////// early return ....
+  if (props.pizzaObj.soldOut) return null;
   return (
     <section className="card">
-      <img height={200} src={props.photoName} alt={props.name} />
-     <div className="card-info">
-       <h2> {props.name}</h2>
-       <p>{props.ingredients}</p>
-       <p>{props.price  }</p>
-     </div>
+      <img
+        height={200}
+        src={props.pizzaObj.photoName}
+        alt={props.pizzaObj.name}
+      />
+      <div className="card-info">
+        <h2> {props.pizzaObj.name}</h2>
+        <p>{props.pizzaObj.ingredients}</p>
+        <p>{props.pizzaObj.price}</p>
+      </div>
     </section>
   );
 }
 
-
-
 function Footer() {
-  const hour = new Date().getHours();  /// 21
-  const openHour = 12 ; 
-  const closeHour = 22 ; 
-  const isOpen = hour >= openHour && hour <= closeHour
-  console.log(isOpen)
-//   if (hour >= openHour && hour <= closeHour){
-// alert("We're currently open")
-//   }  else {
-//     alert("Sorry we're closed !!!!")
-//   }
+  const hour = new Date().getHours(); /// 21
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+
+  // ///// conditionnal rendering with early return ...
+  // if (!isOpen){
+  //   return <p style={{textAlign:"center"}}>
+  //     We're happy to welcome you between {openHour}:00 and {closeHour}:00
+  //   </p>
+  // }
+
+  // return (
+  //  ////// conditional rendering with && operator ...
+  //   <footer>
+  //     {isOpen && (   //// true or false
+  //       <div>
+  //         <p>We're open until {closeHour}:00 , Come visit us or order online</p>
+  //         <button className="btn">Order</button>
+  //       </div>
+  //     )}
+  //   </footer>
+  // );
+
   return (
-    <footer> {new Date().toLocaleTimeString()} We're currently open</footer>
+    <footer>
+      {isOpen ? (
+        <div>
+          <p>We're open until {closeHour}:00 , Come visit us or order online</p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00{" "}
+        </p>
+      )}
+    </footer>
   );
 }
-
-
-
-
 
 const root = ReactDom.createRoot(document.getElementById("root"));
 
