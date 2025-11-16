@@ -80,3 +80,17 @@ footer {
 .btn:hover {
     transform: scale(1.1,1.1);
 }
+
+.menu-introduction {
+   
+    width: 40%;
+    text-align: center;
+    margin: 50px auto;
+    font-weight: 900;
+}
+
+.sold-out {
+    background-color: rgba(128, 128, 128, 0.61);
+    
+}
+
